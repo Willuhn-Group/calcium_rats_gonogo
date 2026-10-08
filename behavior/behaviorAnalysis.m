@@ -29,7 +29,7 @@ cfg.rule = 'DRO-acquired';
 behavior.droAcquisition = extractBehavior(cfg);
 
 
-%% BEHAVIOR DURING GO/NO-GO SESSIONS
+%% Basic behavior
 isession   = 1;
 sel_files  = getEntry(regular_trials,'session_id',isession);
 
@@ -115,7 +115,8 @@ for irat = 1:10
 
 
     % lever presses time distribution along each trial
-    ref_lp = cellfun(@(x,b) (x - b)/max(x - b), {go_data.lpressframe} , {go_data.nosepokeexitframe}, ...
+    ref_lp = cellfun(@(x,b) (x - b)/max(x - b), ...
+        {go_data.lpressframe} , {go_data.nosepokeexitframe}, ...
         'UniformOutput', false);
     ref_lp = cat(2,ref_lp{:});
     cum_lp(irat,:) = histcounts(ref_lp,npoints)/ngo(irat);
